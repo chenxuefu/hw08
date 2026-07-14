@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>批量检测 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/pages/detection.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">批量检测</h1>
+          <div class="page-subtitle">上传多张图片或 ZIP 压缩包，系统将批量执行检测并生成报告</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <div>
+            <div class="card__title">新建批量任务</div>
+            <div class="card__subtitle">支持 jpg / jpeg / png / bmp 单文件 ≤ 10MB，ZIP 压缩包 ≤ 200MB</div>
+          </div>
+        </div>
+        <div class="batch-form-grid">
+          <div class="form-item">
+            <label class="form-label is-required">批次名称</label>
+            <input type="text" class="input" id="batchName" placeholder="请输入批次名称" maxlength="100" />
+          </div>
+          <div class="form-item">
+            <label class="form-label">置信度阈值</label>
+            <div class="threshold-slider" style="width:100%">
+              <input type="range" id="thresholdRange" min="0.05" max="0.95" step="0.05" value="0.25" style="flex:1" />
+              <span class="threshold-slider__value" id="thresholdValue">0.25</span>
+            </div>
+          </div>
+          <div class="form-item batch-form-grid__full">
+            <label class="form-label is-required">文件选择</label>
+            <div class="dropzone" id="dropzone">
+              <div class="dropzone__icon"><i class="fas fa-cloud-arrow-up"></i></div>
+              <div class="dropzone__title">拖拽文件至此，或点击选择</div>
+              <div class="dropzone__hint">支持多张图片或一个 ZIP 压缩包</div>
+              <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.zip" multiple hidden />
+            </div>
+            <div class="file-list" id="fileList"></div>
+          </div>
+        </div>
+        <div class="action-bar" style="margin-top:20px">
+          <div style="flex:1"></div>
+          <button class="btn btn--ghost" id="clearFilesBtn"><i class="fas fa-broom"></i>清空文件</button>
+          <button class="btn btn--primary" id="submitBtn" data-perm="detection:batch:execute"><i class="fas fa-rocket"></i>提交批量任务</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <div>
+            <div class="card__title">批量任务列表</div>
+            <div class="card__subtitle">处理中任务将每 3 秒自动刷新</div>
+          </div>
+          <button class="btn btn--outline btn--sm" id="refreshBtn"><i class="fas fa-rotate"></i>刷新</button>
+        </div>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-id">ID</th>
+                <th class="col-name">批次名称</th>
+                <th>图片总数</th>
+                <th>已处理</th>
+                <th>成功 / 失败</th>
+                <th style="min-width:180px">进度</th>
+                <th class="col-status">状态</th>
+                <th class="col-time">创建时间</th>
+                <th class="col-action">操作</th>
+              </tr>
+            </thead>
+            <tbody id="batchTbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="batchPagination"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/detection_batch.js"></script>
+</body>
+</html>

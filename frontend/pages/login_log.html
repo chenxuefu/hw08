@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>登录日志 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">登录日志</h1>
+          <div class="page-subtitle">记录用户的登录行为与 IP 位置</div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" class="input input--search" id="filterUsername" placeholder="登录账号" />
+        <input type="text" class="input input--search" id="filterIp" placeholder="登录 IP" />
+        <select class="select" id="filterStatus">
+          <option value="">全部状态</option>
+          <option value="1">成功</option>
+          <option value="0">失败</option>
+        </select>
+        <input type="date" class="input input--date" id="filterStart" />
+        <span class="filter-bar__label">至</span>
+        <input type="date" class="input input--date" id="filterEnd" />
+        <button class="btn btn--primary" id="queryBtn"><i class="fas fa-magnifying-glass"></i>查询</button>
+        <button class="btn btn--text" id="resetBtn"><i class="fas fa-rotate"></i>重置</button>
+      </div>
+
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-id">ID</th>
+                <th>账号</th>
+                <th>登录 IP</th>
+                <th>登录地点</th>
+                <th>浏览器</th>
+                <th>操作系统</th>
+                <th class="col-status">状态</th>
+                <th class="col-flex">信息</th>
+                <th class="col-time">登录时间</th>
+              </tr>
+            </thead>
+            <tbody id="logTbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="logPagination"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/login_log.js"></script>
+</body>
+</html>

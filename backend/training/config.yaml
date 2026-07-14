@@ -1,0 +1,9 @@
+base_model: PekingU/rtdetr_r50vd
+train_dir: ../data/wheat_augmented/train
+val_dir: ../data/wheat_augmented/valid
+batch_size: 4
+epochs: 8
+learning_rate: 0.0001
+weight_decay: 0.0001
+output_dir: weights/rtdetr_wheat_best
+weight_file: weights/rtdetr_wheat_best.pth

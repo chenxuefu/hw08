@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>菜单管理 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">菜单管理</h1>
+          <div class="page-subtitle">维护系统菜单与排序，支持多级树形结构</div>
+        </div>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn--primary" id="addBtn" data-perm="menu:create"><i class="fas fa-plus"></i>新增菜单</button>
+        <button class="btn btn--outline" id="refreshBtn"><i class="fas fa-rotate"></i>刷新</button>
+        <div style="flex:1"></div>
+        <button class="btn btn--ghost" id="expandBtn"><i class="fas fa-angles-down"></i>展开全部</button>
+        <button class="btn btn--ghost" id="collapseBtn"><i class="fas fa-angles-up"></i>折叠全部</button>
+      </div>
+
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-flex">菜单名称</th>
+                <th>路径</th>
+                <th>图标</th>
+                <th>排序</th>
+                <th>可见</th>
+                <th class="col-time">创建时间</th>
+                <th class="col-action">操作</th>
+              </tr>
+            </thead>
+            <tbody id="menuTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/menu_manage.js"></script>
+</body>
+</html>

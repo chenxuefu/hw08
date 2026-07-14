@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>个人中心 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">个人中心</h1>
+          <div class="page-subtitle">维护个人基本信息与账号安全设置</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:360px 1fr;gap:20px;width:100%">
+        <div class="card">
+          <div class="card__header"><div class="card__title">账号信息</div></div>
+          <div style="text-align:center">
+            <div id="avatarWrap" style="width:96px;height:96px;margin:12px auto;border-radius:50%;background:var(--color-primary-100);color:var(--color-primary-800);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:600;overflow:hidden;border:3px solid #fff;box-shadow:var(--shadow-sm)"></div>
+            <div id="profileName" style="font-size:18px;font-weight:600;color:var(--color-text-primary)"></div>
+            <div id="profileRole" style="color:var(--color-text-tertiary);margin-top:4px;font-size:13px"></div>
+            <label for="avatarInput" class="btn btn--outline btn--sm" style="margin-top:16px;cursor:pointer"><i class="fas fa-camera"></i>更换头像</label>
+            <input type="file" id="avatarInput" accept=".jpg,.jpeg,.png" hidden />
+          </div>
+          <div class="info-list" style="margin-top:16px" id="profileInfo"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <form class="card" id="profileForm">
+            <div class="card__header"><div class="card__title">基本资料</div></div>
+            <div class="form-grid">
+              <div class="form-item">
+                <label class="form-label is-required">真实姓名</label>
+                <input type="text" class="input" name="real_name" maxlength="50" />
+              </div>
+              <div class="form-item">
+                <label class="form-label">邮箱</label>
+                <input type="email" class="input" name="email" maxlength="100" />
+              </div>
+              <div class="form-item">
+                <label class="form-label">手机号</label>
+                <input type="text" class="input" name="phone" maxlength="11" placeholder="11 位手机号" />
+              </div>
+            </div>
+            <div class="action-bar" style="margin-top:20px">
+              <div style="flex:1"></div>
+              <button type="submit" class="btn btn--primary" id="saveProfileBtn"><i class="fas fa-floppy-disk"></i>保存</button>
+            </div>
+          </form>
+
+          <form class="card" id="passwordForm">
+            <div class="card__header"><div class="card__title">修改密码</div></div>
+            <div class="form-grid">
+              <div class="form-item">
+                <label class="form-label is-required">旧密码</label>
+                <input type="password" class="input" name="old_password" maxlength="50" />
+              </div>
+              <div class="form-item">
+                <label class="form-label is-required">新密码</label>
+                <input type="password" class="input" name="new_password" maxlength="20" />
+              </div>
+              <div class="form-item">
+                <label class="form-label is-required">确认新密码</label>
+                <input type="password" class="input" name="confirm_password" maxlength="20" />
+              </div>
+            </div>
+            <div class="form-help" style="margin-top:10px">密码长度 6-20 字符</div>
+            <div class="action-bar" style="margin-top:20px">
+              <div style="flex:1"></div>
+              <button type="submit" class="btn btn--primary" id="savePasswordBtn"><i class="fas fa-key"></i>更新密码</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/profile.js"></script>
+</body>
+</html>

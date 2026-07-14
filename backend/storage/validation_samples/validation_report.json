@@ -1,0 +1,19 @@
+{
+  "total_images": 45,
+  "images_with_detection": 30,
+  "detection_rate": 0.6667,
+  "total_detections": 109,
+  "avg_inference_time_ms": 38.69,
+  "avg_confidence": 0.1831,
+  "by_class": {
+    "rust": 104,
+    "smut": 1,
+    "healthy": 2,
+    "aphid": 2
+  },
+  "threshold": 0.1,
+  "device": "cuda",
+  "weight_file": "E:\\workplace\\Python_project\\2026.4.22-基于RT-DETR模型的小麦病虫害检测系统设计与实现\\WheatPestDetection\\backend\\weights\\rtdetr_wheat_best.pth",
+  "viz_dir": "E:\\workplace\\Python_project\\2026.4.22-基于RT-DETR模型的小麦病虫害检测系统设计与实现\\WheatPestDetection\\backend\\storage\\validation_samples",
+  "samples": []
+}

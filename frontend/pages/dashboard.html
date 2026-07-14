@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>统计看板 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/pages/dashboard.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">统计看板</h1>
+          <div class="page-subtitle">多维可视化展示检测数据、类别分布与模型精度</div>
+        </div>
+      </div>
+
+      <div class="dashboard-filter">
+        <span class="dashboard-filter__label">统计周期</span>
+        <select class="select" id="rangeSelect" style="width:140px">
+          <option value="7" selected>近 7 天</option>
+          <option value="14">近 14 天</option>
+          <option value="30">近 30 天</option>
+          <option value="90">近 90 天</option>
+        </select>
+        <button class="btn btn--outline btn--sm" id="refreshBtn"><i class="fas fa-rotate"></i>刷新</button>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-card__label">总检测次数</div>
+          <div class="kpi-card__value" id="kpiTotal">-</div>
+          <div class="kpi-card__delta" id="kpiTotalDelta">&nbsp;</div>
+          <div class="kpi-card__icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">今日检测次数</div>
+          <div class="kpi-card__value" id="kpiToday">-</div>
+          <div class="kpi-card__delta" id="kpiTodayDelta">&nbsp;</div>
+          <div class="kpi-card__icon" style="background:#E0F2F1;color:#00796B"><i class="fas fa-calendar-day"></i></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">累计病害数</div>
+          <div class="kpi-card__value" id="kpiDetections">-</div>
+          <div class="kpi-card__delta" id="kpiDetectionsDelta">&nbsp;</div>
+          <div class="kpi-card__icon" style="background:#FFF3E0;color:#CA8A04"><i class="fas fa-bug"></i></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-card__label">当前模型 mAP@0.5</div>
+          <div class="kpi-card__value" id="kpiMap">-</div>
+          <div class="kpi-card__delta" id="kpiMapDelta">&nbsp;</div>
+          <div class="kpi-card__icon" style="background:#FBE9E7;color:#D84315"><i class="fas fa-cubes"></i></div>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="chart-card__title">
+            <span>类别占比</span>
+            <span class="chart-card__title-sub">按检测结果类别统计</span>
+          </div>
+          <div class="chart-card__body" id="pieChart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card__title">
+            <span>检测趋势</span>
+            <span class="chart-card__title-sub" id="trendRange">最近 7 天</span>
+          </div>
+          <div class="chart-card__body" id="lineChart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card__title">
+            <span>活跃用户 Top 10</span>
+            <span class="chart-card__title-sub">按检测次数排序</span>
+          </div>
+          <div class="chart-card__body" id="barUserChart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card__title">
+            <span>各类别检测数量</span>
+            <span class="chart-card__title-sub">按类别统计</span>
+          </div>
+          <div class="chart-card__body" id="barClassChart"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/echarts-theme.js"></script>
+  <script src="/assets/js/pages/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>角色管理 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">角色管理</h1>
+          <div class="page-subtitle">维护角色及其数据范围与菜单权限</div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" class="input input--search" id="filterRoleCode" placeholder="角色编码" />
+        <input type="text" class="input input--search" id="filterRoleName" placeholder="角色名称" />
+        <select class="select" id="filterStatus">
+          <option value="">全部状态</option>
+          <option value="1">启用</option>
+          <option value="0">禁用</option>
+        </select>
+        <button class="btn btn--primary" id="queryBtn"><i class="fas fa-magnifying-glass"></i>查询</button>
+        <button class="btn btn--text" id="resetBtn"><i class="fas fa-rotate"></i>重置</button>
+      </div>
+
+      <div class="action-bar">
+        <button class="btn btn--primary" id="addBtn" data-perm="role:create"><i class="fas fa-plus"></i>新增角色</button>
+        <div style="flex:1"></div>
+      </div>
+
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-id">ID</th>
+                <th>角色编码</th>
+                <th>角色名称</th>
+                <th>数据范围</th>
+                <th class="col-flex">描述</th>
+                <th class="col-status">状态</th>
+                <th class="col-time">创建时间</th>
+                <th class="col-action">操作</th>
+              </tr>
+            </thead>
+            <tbody id="roleTbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="rolePagination"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/role_manage.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>单张检测 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/pages/detection.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">单张检测</h1>
+          <div class="page-subtitle">上传一张小麦叶片图像，模型将自动识别病害类别与位置</div>
+        </div>
+      </div>
+
+      <div class="detection-toolbar">
+        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp" hidden />
+        <button class="btn btn--outline" id="chooseBtn"><i class="fas fa-image"></i>选择图片</button>
+        <div class="threshold-slider">
+          <span class="threshold-slider__label">置信度阈值</span>
+          <input type="range" id="thresholdRange" min="0.05" max="0.95" step="0.05" value="0.25" />
+          <span class="threshold-slider__value" id="thresholdValue">0.25</span>
+        </div>
+        <div style="flex:1"></div>
+        <button class="btn btn--ghost" id="resetBtn"><i class="fas fa-rotate"></i>清空</button>
+        <button class="btn btn--primary" id="runBtn" data-perm="detection:single:execute" disabled><i class="fas fa-bolt"></i>执行检测</button>
+      </div>
+
+      <div class="detection-layout">
+        <div class="detection-image-card">
+          <div class="detection-image-card__header">
+            <span>原图预览</span>
+            <span class="detection-image-card__file" id="originFileName">-</span>
+          </div>
+          <div class="detection-image-card__body" id="originBody">
+            <div class="detection-image-card__placeholder">
+              <i class="fas fa-image"></i>
+              <span>点击"选择图片"或拖拽图像至此处</span>
+            </div>
+          </div>
+        </div>
+        <div class="detection-image-card">
+          <div class="detection-image-card__header">
+            <span>检测结果</span>
+            <button class="btn btn--text btn--sm" id="downloadBtn" data-perm="detection:record:download" style="display:none"><i class="fas fa-download"></i>下载结果图</button>
+          </div>
+          <div class="detection-image-card__body" id="resultBody">
+            <div class="detection-image-card__placeholder">
+              <i class="fas fa-wand-magic-sparkles"></i>
+              <span>执行检测后，结果图将显示在此处</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detection-stats" id="detectionStats" style="display:none">
+        <div class="detection-stat">
+          <div class="detection-stat__label">检测目标数</div>
+          <div class="detection-stat__value" id="statTotal">0</div>
+        </div>
+        <div class="detection-stat">
+          <div class="detection-stat__label">平均置信度</div>
+          <div class="detection-stat__value" id="statAvg">0%</div>
+        </div>
+        <div class="detection-stat">
+          <div class="detection-stat__label">推理耗时</div>
+          <div class="detection-stat__value" id="statCost">0 ms</div>
+        </div>
+        <div class="detection-stat">
+          <div class="detection-stat__label">原图尺寸</div>
+          <div class="detection-stat__value" id="statSize">-</div>
+        </div>
+      </div>
+
+      <div class="card" id="resultsCard" style="display:none">
+        <div class="card__header">
+          <div>
+            <div class="card__title">检测明细</div>
+            <div class="card__subtitle">按置信度从高到低排序</div>
+          </div>
+          <button class="btn btn--outline btn--sm" id="goDetailBtn"><i class="fas fa-arrow-up-right-from-square"></i>查看完整详情</button>
+        </div>
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-id">序号</th>
+                <th class="col-name">类别</th>
+                <th>置信度</th>
+                <th>bbox_x</th>
+                <th>bbox_y</th>
+                <th>bbox_w</th>
+                <th>bbox_h</th>
+              </tr>
+            </thead>
+            <tbody id="resultsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/detection_single.js"></script>
+</body>
+</html>

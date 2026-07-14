@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>登录 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/pages/login.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-brand">
+      <div class="login-brand__logo">
+        <i class="fas fa-wheat-awn"></i>
+        <span>小麦病虫害智能检测系统</span>
+      </div>
+      <div class="login-brand__content">
+        <h1 class="login-brand__title">基于 RT-DETR 深度学习模型的<br>小麦病虫害智能检测平台</h1>
+        <p class="login-brand__subtitle">为农户与农业专家提供锈病、黑穗病、蚜虫及健康叶的精准识别与防治指导。</p>
+        <div class="login-brand__features">
+          <div class="login-brand__feature"><i class="fas fa-check"></i><span>端到端目标检测，免 NMS 后处理</span></div>
+          <div class="login-brand__feature"><i class="fas fa-check"></i><span>单图 300 毫秒实时推理</span></div>
+          <div class="login-brand__feature"><i class="fas fa-check"></i><span>批量 ZIP 任务进度可视化</span></div>
+          <div class="login-brand__feature"><i class="fas fa-check"></i><span>全链路审计与权限控制</span></div>
+        </div>
+      </div>
+      <div class="login-brand__footer">© 2026 WheatPestDetection · 版本 v1.0.0</div>
+    </div>
+    <div class="login-form-wrap">
+      <form class="login-form" id="loginForm" autocomplete="off">
+        <div>
+          <div class="login-form__title">欢迎登录</div>
+          <div class="login-form__subtitle">请输入账号与密码进入系统</div>
+        </div>
+        <div class="form-item">
+          <label class="form-label is-required">账号</label>
+          <div class="input-group">
+            <i class="fas fa-user input-group__icon"></i>
+            <input type="text" class="input" id="username" name="username" placeholder="请输入账号" maxlength="50" autocomplete="username" />
+          </div>
+          <div class="form-error" id="usernameErr"></div>
+        </div>
+        <div class="form-item">
+          <label class="form-label is-required">密码</label>
+          <div class="input-group">
+            <i class="fas fa-lock input-group__icon"></i>
+            <input type="password" class="input" id="password" name="password" placeholder="请输入密码" maxlength="50" autocomplete="current-password" />
+            <i class="fas fa-eye input-group__toggle" id="togglePassword"></i>
+          </div>
+          <div class="form-error" id="passwordErr"></div>
+        </div>
+        <button type="submit" class="btn btn--primary" id="loginBtn"><i class="fas fa-arrow-right-to-bracket"></i>登录</button>
+        <div class="login-form__hint">
+          测试账号：<code>admin</code> / <code>expert</code> / <code>farmer</code>，密码均为 <code>123456</code>
+        </div>
+        <div style="text-align:center">
+          <span class="login-form__back" id="backHome"><i class="fas fa-arrow-left"></i>返回首页</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script>
+    (function () {
+      const form = document.getElementById('loginForm');
+      const usernameEl = document.getElementById('username');
+      const passwordEl = document.getElementById('password');
+      const btn = document.getElementById('loginBtn');
+      const usernameErr = document.getElementById('usernameErr');
+      const passwordErr = document.getElementById('passwordErr');
+      const toggle = document.getElementById('togglePassword');
+
+      if (window.auth && window.auth.isLoggedIn()) {
+        window.redirectAfterLogin();
+        return;
+      }
+
+      toggle.addEventListener('click', () => {
+        const isPwd = passwordEl.type === 'password';
+        passwordEl.type = isPwd ? 'text' : 'password';
+        toggle.className = isPwd ? 'fas fa-eye-slash input-group__toggle' : 'fas fa-eye input-group__toggle';
+      });
+
+      document.getElementById('backHome').addEventListener('click', () => {
+        window.location.href = '/index.html';
+      });
+
+      function validate() {
+        let ok = true;
+        const u = usernameEl.value.trim();
+        const p = passwordEl.value;
+        usernameErr.textContent = '';
+        passwordErr.textContent = '';
+        usernameEl.classList.remove('is-error');
+        passwordEl.classList.remove('is-error');
+        if (u.length < 4 || u.length > 50) {
+          usernameErr.textContent = '账号长度应为 4-50 字符';
+          usernameEl.classList.add('is-error');
+          ok = false;
+        }
+        if (p.length < 6 || p.length > 50) {
+          passwordErr.textContent = '密码长度应为 6-50 字符';
+          passwordEl.classList.add('is-error');
+          ok = false;
+        }
+        return ok;
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!validate()) return;
+        window.setButtonLoading(btn, true, '登录中...');
+        try {
+          const data = await window.api.auth.login({
+            username: usernameEl.value.trim(),
+            password: passwordEl.value,
+          });
+          await window.auth.saveLoginResult(data);
+          try { await window.auth.fetchUserInfo(); } catch (e2) { }
+          try { await window.auth.fetchMenus(); } catch (e2) { }
+          window.toast.success('登录成功');
+          setTimeout(() => window.redirectAfterLogin(), 300);
+        } catch (err) {
+          window.setButtonLoading(btn, false);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

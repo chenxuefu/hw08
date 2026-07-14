@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/pages/portal.css">
+</head>
+<body class="portal-body">
+  <nav class="portal-nav" id="portalNav">
+    <div class="portal-nav__logo">
+      <i class="fas fa-wheat-awn"></i>
+      <span>小麦病虫害智能检测系统</span>
+    </div>
+    <div class="portal-nav__links">
+      <span class="portal-nav__link" data-anchor="#hero">首页</span>
+      <span class="portal-nav__link" data-anchor="#features">系统介绍</span>
+      <span class="portal-nav__link" data-anchor="#flow">使用流程</span>
+      <span class="portal-nav__link" data-anchor="#contact">联系方式</span>
+      <button class="btn btn--outline btn--sm" id="navLibrary"><i class="fas fa-book-open"></i>病害知识库</button>
+      <button class="btn btn--primary btn--sm" id="navLogin"><i class="fas fa-arrow-right-to-bracket"></i>立即登录</button>
+    </div>
+  </nav>
+
+  <section class="portal-hero" id="hero">
+    <div class="portal-hero__inner">
+      <div>
+        <span class="portal-hero__eyebrow">
+          <i class="fas fa-certificate"></i>
+          基于 RT-DETR 的端到端目标检测
+        </span>
+        <h1 class="portal-hero__title">智能识别 · <em>精准防治</em><br>守护每一粒小麦</h1>
+        <p class="portal-hero__subtitle">面向小麦种植生产场景的 Web 端病虫害智能检测系统，采用 RT-DETR 深度学习模型实现锈病、黑穗病、蚜虫等四类目标的实时识别与定位，辅助农户与农业专家快速诊断并采取有效防治措施。</p>
+        <div class="portal-hero__actions">
+          <button class="btn btn--primary btn--lg" id="heroLogin"><i class="fas fa-arrow-right-to-bracket"></i>立即登录</button>
+          <button class="btn btn--outline btn--lg" id="heroLibrary"><i class="fas fa-book-open"></i>查看病害知识库</button>
+        </div>
+        <div class="portal-hero__stats">
+          <div>
+            <div class="portal-stat__value">4</div>
+            <div class="portal-stat__label">病害类别</div>
+          </div>
+          <div>
+            <div class="portal-stat__value">440+</div>
+            <div class="portal-stat__label">训练样本</div>
+          </div>
+          <div>
+            <div class="portal-stat__value">95%</div>
+            <div class="portal-stat__label">平均精度</div>
+          </div>
+        </div>
+      </div>
+      <div class="portal-hero__visual">
+        <svg viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E8F5E9"/>
+              <stop offset="100%" stop-color="#C8E6C9"/>
+            </linearGradient>
+            <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#43A047"/>
+              <stop offset="100%" stop-color="#1B5E20"/>
+            </linearGradient>
+          </defs>
+          <rect width="520" height="480" fill="url(#bg)"/>
+          <g fill="url(#leaf)" opacity="0.85">
+            <path d="M100 380 Q 160 80 260 60 Q 360 80 420 380 Q 260 340 100 380 Z"/>
+          </g>
+          <g stroke="#1B5E20" stroke-width="2" fill="none" opacity="0.5">
+            <path d="M260 60 L 260 380"/>
+            <path d="M260 140 L 180 200"/>
+            <path d="M260 200 L 340 260"/>
+            <path d="M260 260 L 180 320"/>
+          </g>
+          <g>
+            <rect x="210" y="150" width="96" height="76" fill="none" stroke="#D84315" stroke-width="3"/>
+            <rect x="206" y="132" width="80" height="20" fill="#D84315"/>
+            <text x="214" y="147" fill="#fff" font-size="12" font-weight="600" font-family="Inter, sans-serif">rust 0.93</text>
+          </g>
+          <g>
+            <rect x="300" y="250" width="80" height="60" fill="none" stroke="#F57F17" stroke-width="3"/>
+            <rect x="296" y="232" width="90" height="20" fill="#F57F17"/>
+            <text x="304" y="247" fill="#fff" font-size="12" font-weight="600" font-family="Inter, sans-serif">aphid 0.87</text>
+          </g>
+          <g>
+            <rect x="140" y="310" width="70" height="50" fill="none" stroke="#2E7D32" stroke-width="3"/>
+            <rect x="136" y="292" width="98" height="20" fill="#2E7D32"/>
+            <text x="144" y="307" fill="#fff" font-size="12" font-weight="600" font-family="Inter, sans-serif">healthy 0.91</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="portal-section" id="features">
+    <div class="portal-section__header">
+      <h2 class="portal-section__title">核心特性</h2>
+      <p class="portal-section__subtitle">围绕小麦病虫害检测全流程打造，从图像采集到防治建议闭环，帮助用户快速识别与科学决策</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card__icon"><i class="fas fa-bolt"></i></div>
+        <div class="feature-card__title">实时检测</div>
+        <div class="feature-card__desc">GPU 加速推理，单张图像 300 毫秒内完成，支持 jpg、png、bmp 多种格式，端到端零 NMS 处理。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><i class="fas fa-brain"></i></div>
+        <div class="feature-card__title">RT-DETR 模型</div>
+        <div class="feature-card__desc">基于 Transformer 的端到端目标检测架构，免 NMS 后处理，精度与速度兼顾，适配农业场景复杂背景。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><i class="fas fa-layer-group"></i></div>
+        <div class="feature-card__title">批量处理</div>
+        <div class="feature-card__desc">支持 ZIP 压缩包或多图批量上传，异步任务处理，进度实时可见，结果一键导出为 CSV 报告。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><i class="fas fa-book-open"></i></div>
+        <div class="feature-card__title">知识库支持</div>
+        <div class="feature-card__desc">内置 4 类常见小麦病虫害的症状、诱因与防治方法，结果页一键跳转查阅防治建议。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><i class="fas fa-chart-line"></i></div>
+        <div class="feature-card__title">可视化看板</div>
+        <div class="feature-card__desc">类别占比、每日趋势、活跃用户、模型精度多维可视化，辅助专家与管理员决策。</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="feature-card__title">多角色权限</div>
+        <div class="feature-card__desc">超级管理员、农业专家、普通用户三级角色，RBAC 精细到按钮与数据范围，审计日志完整留痕。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portal-section portal-section--muted" id="flow">
+    <div class="portal-section__header">
+      <h2 class="portal-section__title">使用流程</h2>
+      <p class="portal-section__subtitle">四步即可完成一次完整的小麦病虫害诊断</p>
+    </div>
+    <div class="portal-flow">
+      <div class="portal-flow__step">
+        <div class="portal-flow__step-num">1</div>
+        <div class="portal-flow__step-title">上传图像</div>
+        <div class="portal-flow__step-desc">支持本地选择或拖拽上传，单张或批量 ZIP 均可</div>
+      </div>
+      <div class="portal-flow__step">
+        <div class="portal-flow__step-num">2</div>
+        <div class="portal-flow__step-title">模型推理</div>
+        <div class="portal-flow__step-desc">后端调用 RT-DETR 模型进行目标定位与分类</div>
+      </div>
+      <div class="portal-flow__step">
+        <div class="portal-flow__step-num">3</div>
+        <div class="portal-flow__step-title">可视化结果</div>
+        <div class="portal-flow__step-desc">在原图上叠加检测框，明细列表展示类别与置信度</div>
+      </div>
+      <div class="portal-flow__step">
+        <div class="portal-flow__step-num">4</div>
+        <div class="portal-flow__step-title">查阅防治建议</div>
+        <div class="portal-flow__step-desc">点击结果项跳转知识库，查看防治方案并记录历史</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portal-cta" id="contact">
+    <h2 class="portal-cta__title">开始使用小麦病虫害智能检测系统</h2>
+    <p class="portal-cta__subtitle">登录账号，立即体验 RT-DETR 驱动的精准农业识别能力</p>
+    <div class="portal-cta__actions">
+      <button class="btn btn--cta btn--lg" id="ctaLogin"><i class="fas fa-rocket"></i>开始使用系统</button>
+      <button class="btn btn--outline btn--lg" id="ctaLibrary" style="color:#fff;border-color:rgba(255,255,255,0.8)"><i class="fas fa-book-open"></i>浏览知识库</button>
+    </div>
+  </section>
+
+  <footer class="portal-footer">
+    <div class="portal-footer__row">
+      <div class="portal-footer__brand"><i class="fas fa-wheat-awn"></i> 小麦病虫害智能检测系统</div>
+      <div class="portal-footer__links">
+        <a href="#hero">首页</a>
+        <a href="#features">系统介绍</a>
+        <a href="#flow">使用流程</a>
+        <a href="/pages/login.html">登录</a>
+      </div>
+    </div>
+    <div class="portal-footer__divider"></div>
+    <div class="portal-footer__row">
+      <div class="portal-footer__copy">技术栈：Flask 3.0 · SQLAlchemy 2.0 · PyTorch 2.10 · RT-DETR · ECharts 5.5 · Axios 1.7</div>
+      <div class="portal-footer__copy">© 2026 WheatPestDetection · 基于 RT-DETR 模型的小麦病虫害检测系统</div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script>
+    (function () {
+      const nav = document.getElementById('portalNav');
+      const onScroll = () => {
+        if (window.scrollY > 20) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
+      };
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+
+      document.querySelectorAll('[data-anchor]').forEach((el) => {
+        el.addEventListener('click', () => {
+          const sel = el.dataset.anchor;
+          const target = document.querySelector(sel);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      const goLogin = () => {
+        if (window.auth && window.auth.isLoggedIn()) {
+          window.location.href = '/pages/detection_single.html';
+        } else {
+          window.location.href = '/pages/login.html';
+        }
+      };
+      const goLibrary = () => {
+        if (window.auth && window.auth.isLoggedIn()) {
+          window.location.href = '/pages/disease_library.html';
+        } else {
+          window.location.href = '/pages/login.html?return=/pages/disease_library.html';
+        }
+      };
+
+      document.getElementById('navLogin').addEventListener('click', goLogin);
+      document.getElementById('navLibrary').addEventListener('click', goLibrary);
+      document.getElementById('heroLogin').addEventListener('click', goLogin);
+      document.getElementById('heroLibrary').addEventListener('click', goLibrary);
+      document.getElementById('ctaLogin').addEventListener('click', goLogin);
+      document.getElementById('ctaLibrary').addEventListener('click', goLibrary);
+
+      if (window.auth && window.auth.isLoggedIn()) {
+        const loginBtns = [document.getElementById('navLogin'), document.getElementById('heroLogin'), document.getElementById('ctaLogin')];
+        loginBtns.forEach((b) => {
+          if (!b) return;
+          b.innerHTML = '<i class="fas fa-arrow-right-to-bracket"></i>进入系统';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

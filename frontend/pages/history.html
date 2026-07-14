@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>检测历史 · 小麦病虫害智能检测系统</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/layout.css">
+  <link rel="stylesheet" href="/assets/css/pages/detection.css">
+</head>
+<body>
+  <header id="app-header"></header>
+  <aside id="app-sidebar"></aside>
+  <main class="app-main">
+    <div class="page">
+      <div id="app-breadcrumb"></div>
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">检测历史</h1>
+          <div class="page-subtitle">查看检测记录，支持按图片文件名、类别、状态与时间区间筛选</div>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" class="input input--search" id="filterUsername" placeholder="提交用户名" />
+        <select class="select" id="filterClassName">
+          <option value="">全部类别</option>
+          <option value="rust">锈病</option>
+          <option value="smut">黑穗病</option>
+          <option value="healthy">健康叶</option>
+          <option value="aphid">蚜虫</option>
+        </select>
+        <select class="select" id="filterStatus">
+          <option value="">全部状态</option>
+          <option value="0">处理中</option>
+          <option value="1">成功</option>
+          <option value="2">失败</option>
+        </select>
+        <input type="date" class="input input--date" id="filterStart" />
+        <span class="filter-bar__label">至</span>
+        <input type="date" class="input input--date" id="filterEnd" />
+        <button class="btn btn--primary" id="queryBtn"><i class="fas fa-magnifying-glass"></i>查询</button>
+        <button class="btn btn--text" id="resetBtn"><i class="fas fa-rotate"></i>重置</button>
+      </div>
+
+      <div class="card" style="padding:0">
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-id">ID</th>
+                <th style="min-width:100px">缩略图</th>
+                <th class="col-flex">图片名称</th>
+                <th>提交用户</th>
+                <th>检测数</th>
+                <th style="min-width:140px">平均置信度</th>
+                <th>耗时(ms)</th>
+                <th class="col-status">状态</th>
+                <th class="col-time">检测时间</th>
+                <th class="col-action">操作</th>
+              </tr>
+            </thead>
+            <tbody id="historyTbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="historyPagination"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.7/dist/axios.min.js"></script>
+  <script src="/assets/js/common.js"></script>
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/permission.js"></script>
+  <script src="/assets/js/router.js"></script>
+  <script src="/assets/js/layout.js"></script>
+  <script src="/assets/js/pages/history.js"></script>
+</body>
+</html>

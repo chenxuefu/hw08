@@ -1,6 +1,7 @@
 conda create -n py311 python=3.11 -y
 ##
 1、"D:\jupyter\yovol\WheatPestDetection\backend\run.py"  ---python run.py
+#
 2、"D:\jupyter\yovol\WheatPestDetection\frontend\server.py"  ---python server.py
 3、http://127.0.0.1:8080
 
